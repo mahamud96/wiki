@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+
+<h1>New Article</h1>
+
+<form action="{% url 'new_article' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title">
+    <br>
+    <br>
+    <textarea name="article" placeholder="READ THIS!!! 
+When writing your article ensure you use the hashtag sign (#) to indicate the title of the page."></textarea>
+    <br>
+    <input type="submit" value="Create New Article">
+</form>
+
+{% endblock %}
