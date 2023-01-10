@@ -27,3 +27,24 @@ def page(request, title):
             "title": title,
             "article": html_article,
         })
+
+def search(request):
+    if request.method == "POST":
+        article_search = request.POST['q']
+        html_article = md_conversion(article_search)
+        if html_article is not None:
+            return render(request, "encyclopedia/entries.html", {
+            "title": article_search,
+            "article": html_article,
+            })
+        else:
+            # substring search
+            substr_search = util.list_entries()
+            # substring result
+            substr_result = []
+            for entry in substr_search:
+                if article_search.lower() in entry.lower():
+                    substr_result.append(entry)
+            return render(request, "encyclopedia/search.html",{
+                "substr_result": substr_result
+            })
