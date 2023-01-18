@@ -8,4 +8,10 @@
 
     {{article|safe}}
 
+    <form action = "{% url 'edit_article' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="article_title" value="{{ title }}">
+        <input type="submit" value="Edit {{title}} Article">
+    </form>
+
 {% endblock %}
